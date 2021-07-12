@@ -10,8 +10,8 @@ drugs=['bepridil', 'chlorpromazine', 'cisapride', 'diltiazem', 'dofetilide', 'me
 doses=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25]
 
 # prepares data by producing by creating two dataframes with the same columns
-va_population = '95-105%'
-biomarker = 'APD90'
+va_population = '50-150%'
+biomarker = 'qNet'
 
 #load correct metrics file
 if va_population == '50-150%':
@@ -59,7 +59,7 @@ for drug in drugs:
     plt.plot([], c='#D7191C', label='Virtual Assay')
     plt.plot([], c='#2C7BB6', label='CiPA')
     plt.legend()
-    plt.title(drug)
+    plt.title(va_population+' population, '+ biomarker+', '+drug)
 
     plt.xticks(range(0, len(doses) * 2, 2), doses)
     plt.xlim(-2, len(doses)*2)
