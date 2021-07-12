@@ -11,7 +11,7 @@ doses=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25]
 
 # prepares data by producing by creating two dataframes with the same columns
 va_population = '95-105%'
-biomarker = 'qNet'
+biomarker = 'APD90'
 
 #load correct metrics file
 if va_population == '50-150%':
@@ -27,6 +27,8 @@ cipa_metrics = pd.read_csv(data_path+'/cipa_metrics.csv')
 va_metrics = va_metrics.rename(columns={'APD1':'APD90'})
 # adjust qNet values to match
 cipa_metrics['qNet'] = cipa_metrics['qNet']/1000
+# remove empty values (NA) from cipa
+cipa_metrics.dropna(subset = [biomarker], inplace=True)
 
 # go through each drug and make a boxplot
 for drug in drugs:
