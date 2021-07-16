@@ -11,21 +11,15 @@ drugs=['bepridil', 'chlorpromazine', 'cisapride', 'diltiazem', 'dofetilide', 'me
 doses=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25]
 
 # prepares data by producing by creating two dataframes with the same columns
-dataset='with_CiPA_parameters' # to use data from Crumb et al use 'with_Crumb_parameters'
+dataset='with_Crumb_parameters' # to use data from Crumb et al use 'with_Crumb_parameters'
 va_population = '+-50%'
-biomarker = 'qNet' # can use 'APD90' also
+biomarker = 'qNet' # can use 'APD90' or 'qNet
 
-plot_path = os.getcwd()+'/plots' # datapath for plots
-metrics_path = os.getcwd()+'/metrics'
+plot_path = os.getcwd()+'/../plots' # datapath for plots
+metrics_path = os.getcwd()+'/../metrics'
 
-#load correct va metrics file
-if va_population == '+-50%':
-    va_metrics = pd.read_csv(metrics_path+'/va/'+dataset+'/va+-50%_population_with_CiPA_parameters.csv')
-elif va_population == '+-30%':
-    va_metrics = pd.read_csv(metrics_path+'/va/'+dataset+'/va+-30%_population_with_CiPA_parameters.csv')
-elif va_population == '+-5%':
-    va_metrics = pd.read_csv(metrics_path+'/va/'+dataset+'/va+-5%_population_with_CiPA_parameters.csv')
-
+#load correct  metrics file
+va_metrics = pd.read_csv(metrics_path+'/va/'+dataset+'/va'+va_population+'_population_'+dataset+'.csv')
 cipa_metrics = pd.read_csv(metrics_path+'/cipa/cipa_metrics.csv')
 
 # rename va biomarkers to match cipa
@@ -71,5 +65,5 @@ for drug in drugs:
 
     plt.tight_layout()
 
-    plt.savefig(plots_path+'/'+dataset+'/'+va_population+'/'+biomarker+'/'+va_population+'_'+drug+'_'+biomarker)
+    plt.savefig(plot_path+'/'+dataset+'/'+va_population+'/'+biomarker+'/'+va_population+'_'+drug+'_'+biomarker)
 
