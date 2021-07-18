@@ -10,13 +10,22 @@ drugs=['bepridil', 'chlorpromazine', 'cisapride', 'diltiazem', 'dofetilide', 'me
        'ranolazine', 'sotalol', 'terfenadine', 'verapamil'] # list of drugs to be iterated through
 doses=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25]
 
-# prepares data by producing by creating two dataframes with the same columns
-dataset='with_Crumb_parameters' # to use data from Crumb et al use 'with_Crumb_parameters'
+# if true, output from the normal CiPA model including the model for dynamic hERG is used. If false, output from cipa
+# model without the dynamic hERG model is used
+with_dynhERG = True
+
+# to use data from Crumb et al use 'with_Crumb_parameters', to use data outputs that match the default CiPA input,
+# use 'with_CiPA_parameters'
+dataset='with_Crumb_parameters'
+
+# denotes the variance of the population of the Virtual ASsay output to be plotted. Can be '+-50%', '+-30%' or '+-5%'
 va_population = '+-50%'
-biomarker = 'qNet' # can use 'APD90' or 'qNet
+
+# Relevant biomarkers: 'APD90' or 'qNet'
+biomarker = 'qNet'
 
 plot_path = os.getcwd()+'/../plots' # datapath for plots
-metrics_path = os.getcwd()+'/../metrics'
+metrics_path = os.getcwd()+'/../metrics' # datapath for metrics
 
 #load correct  metrics file
 va_metrics = pd.read_csv(metrics_path+'/va/'+dataset+'/va'+va_population+'_population_'+dataset+'.csv')
@@ -65,5 +74,8 @@ for drug in drugs:
 
     plt.tight_layout()
 
-    plt.savefig(plot_path+'/'+dataset+'/'+va_population+'/'+biomarker+'/'+va_population+'_'+drug+'_'+biomarker)
+    if with_dynhERG:
+        plt.savefig(plot_path+'/cipa_dynHerg/'+dataset+'/'+va_population+'/'+biomarker+'/'+va_population+'_'+drug+'_'+biomarker)
+    else:
+        plt.savefig(plot_path+'/cipa_no_dynHerg/'+dataset+'/'+va_population+'/'+biomarker+'/'+va_population+'_'+drug+'_'+biomarker)
 
