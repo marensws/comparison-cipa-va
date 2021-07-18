@@ -29,7 +29,11 @@ metrics_path = os.getcwd()+'/../metrics' # datapath for metrics
 
 #load correct  metrics file
 va_metrics = pd.read_csv(metrics_path+'/va/'+dataset+'/va'+va_population+'_population_'+dataset+'.csv')
-cipa_metrics = pd.read_csv(metrics_path+'/cipa/cipa_metrics.csv')
+if with_dynhERG:
+    cipa_metrics = pd.read_csv(metrics_path+'/cipa/cipa_metrics.csv')
+else:
+    cipa_metrics = pd.read_csv(metrics_path+'/cipa/cipa_noDynhERG_metrics.csv')
+
 
 # rename va biomarkers to match cipa
 va_metrics = va_metrics.rename(columns={'APD1':'APD90'})
