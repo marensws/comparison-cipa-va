@@ -12,14 +12,14 @@ doses=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25]
 
 # if true, output from the normal CiPA model including the model for dynamic hERG is used. If false, output from cipa
 # model without the dynamic hERG model is used
-with_dynhERG = True
+with_dynhERG = False
 
 # to use data from Crumb et al use 'with_Crumb_parameters', to use data outputs that match the default CiPA input,
 # use 'with_CiPA_parameters'
 dataset='with_Crumb_parameters'
 
 # denotes the variance of the population of the Virtual ASsay output to be plotted. Can be '+-50%', '+-30%' or '+-5%'
-va_population = '+-50%'
+va_population = '+-30%'
 
 # Relevant biomarkers: 'APD90' or 'qNet'
 biomarker = 'qNet'
@@ -68,8 +68,11 @@ for drug in drugs:
     set_box_color(bpl, '#D7191C') # colors are from http://colorbrewer2.org/
     set_box_color(bpr, '#2C7BB6')
 
-    plt.plot([], c='#D7191C', label='Virtual Assay')
-    plt.plot([], c='#2C7BB6', label='CiPA')
+    plt.plot([], c='#D7191C', label='Virtual Assay '+dataset)
+    if with_dynhERG:
+        plt.plot([], c='#2C7BB6', label='CiPA with dynamic hERG')
+    else:
+        plt.plot([], c='#2C7BB6', label='CiPA without dynamic hERG')
     plt.legend()
     plt.title(va_population+' population, '+ biomarker+', '+drug)
 

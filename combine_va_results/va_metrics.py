@@ -20,8 +20,8 @@ drugs = {
     'verapamil': '45'
 }
 
-dataset = 'with_Crumb_parameters' # can also be set to 'with_Crumb_parameters' to use data from Crumb et al
-population = '+-5%' # level of variance in the population can be '+-5%', '+-30%' and '+-50%' with data provided
+dataset = 'with_CiPA_parameters' # can also be set to 'with_Crumb_parameters' to use data from Crumb et al
+population = '+-30%' # level of variance in the population can be '+-5%', '+-30%' and '+-50%' with data provided
 
 data_path = os.getcwd()+'/'+dataset+'/'+population # get the directory of the path where this file is stored.
 metrics_path = os.getcwd()+'/../metrics/va/'+dataset # the directory where the metrics file is to be stored
